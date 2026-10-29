@@ -1,0 +1,6 @@
+{
+  "name": "CazzoCard",
+  "description": "Store, scan, and organize your loyalty and fidelity cards and discount receipts with instant camera scanning, brand logos, multi-solid color grid, and smart search.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

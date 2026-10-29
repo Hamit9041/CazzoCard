@@ -1,0 +1,32 @@
+{
+  "id": "/",
+  "name": "CazzoCard - Fidelity Cards & Discounts",
+  "short_name": "CazzoCard",
+  "description": "Store and scan loyalty cards, supermarket fidelity barcodes, and discount receipts with automated expiry alerts.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#020617",
+  "theme_color": "#e11d48",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
