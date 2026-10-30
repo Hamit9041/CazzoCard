@@ -191,8 +191,39 @@ export default function App() {
     }
   };
 
+  // Touch swipe handling for switching sections
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchStartY, setTouchStartY] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+    setTouchStartY(e.touches[0].clientY);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null || touchStartY === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX;
+    const deltaY = e.changedTouches[0].clientY - touchStartY;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 70) {
+      if (deltaX > 0 && activeSection === 'receipts') {
+        setActiveSection('cards');
+        showToast('Switched to Cards', 'info');
+      } else if (deltaX < 0 && activeSection === 'cards') {
+        setActiveSection('receipts');
+        showToast('Switched to Discounts', 'info');
+      }
+    }
+    setTouchStartX(null);
+    setTouchStartY(null);
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
+    <div
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors"
+    >
       {/* Top Navigation Bar with Section Switcher & Theme Control */}
       <TopBar
         totalCards={cards.length}

@@ -170,6 +170,10 @@ Return clean JSON matching the schema.`,
 });
 
 async function startServer() {
+  app.listen(Number(PORT), '0.0.0.0', () => {
+    console.log(`Server listening on port ${PORT} (${isDev ? 'development' : 'production'})`);
+  });
+
   if (isDev) {
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
@@ -184,10 +188,7 @@ async function startServer() {
       res.sendFile(path.resolve(distPath, 'index.html'));
     });
   }
-
-  app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT} (${isDev ? 'development' : 'production'})`);
-  });
 }
 
 startServer();
+

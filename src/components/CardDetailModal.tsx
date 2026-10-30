@@ -119,8 +119,27 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
     );
   }
 
+  const [modalTouchStartY, setModalTouchStartY] = useState<number | null>(null);
+
+  const handleModalTouchStart = (e: React.TouchEvent) => {
+    setModalTouchStartY(e.touches[0].clientY);
+  };
+
+  const handleModalTouchEnd = (e: React.TouchEvent) => {
+    if (modalTouchStartY === null) return;
+    const deltaY = e.changedTouches[0].clientY - modalTouchStartY;
+    if (deltaY > 80) {
+      onClose();
+    }
+    setModalTouchStartY(null);
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
+    <div
+      onTouchStart={handleModalTouchStart}
+      onTouchEnd={handleModalTouchEnd}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
+    >
       <div className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col max-h-[92vh] overflow-hidden text-slate-900 dark:text-slate-100">
         {/* Top Header Card Banner - Displays authentic card physical artwork if found, otherwise multi-solid colors */}
         <div
